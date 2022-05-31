@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}リクエスト詳細{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <label for="date">日付</label>
+  <span name="date" id="date">{{ data['date'] }}</span>
+    
+  <label for="money">金額</label>
+  <span name="money" id="money">{{ data['money'] }}</span>
+
+  <label for="beneficiaryName">振込先</label>
+  <span name="beneficiaryName" id="beneficiaryName">{{ data['beneficiaryName'] }}</span>
+  
+  <label for="applyNo">申請No</label>
+  <span name="applyNo" id="applyNo">{{ data['applyNo'] }}</span>
+
+  <label for="flag">状態</label>
+  {% if data['flag'] == 1 %}
+    <span name="flag" id="flag">受付完了</span>
+  {% endif %}
+  {% if data['flag'] == 2 %}
+    <span name="flag" id="flag">受付保留中</span>
+  {% endif %}
+  {% if data['flag'] == 8 %}
+    <span name="flag" id="flag">受付期限切れ</span>
+  {% endif %}
+
+  {% if data['flag'] == 1 %}
+  <form method="post">
+    <div>
+      <label for="shipname">家族を選択</label>
+        <select name="family" id="family">
+        {% for family in postfamily %}
+          <option value="{{ family['famname'] }}">{{ family['famname'] }}</option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <div>
+      <input type="submit" value="却下する" onclick="return confirm('本当に却下しますか?');">
+    </div>
+  
+  {% endif %}
+
+<a href="{{ url_for('history.index') }}">戻る</a>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}警告！！{% endblock %}</h1>
+  <h2>この取引を却下すると下記の取引内容を差し戻す事になりますがよろしいですか？</h2>
+{% endblock %}
+
+{% block content %}
+  <label for="date">日付</label>
+  <span name="date" id="date">{{ postdata['date'] }}</span>
+    
+  <label for="action">行動</label>
+  <span name="action" id="action">{{ postdata['action'] }}</span>
+
+  <label for="place">取引先</label>
+  <span name="place" id="place">{{ postdata['place'] }}</span>
+  
+  <label for="money">金額</label>
+  <span name="money" id="money">{{ postdata['money'] }}</span>
+  
+  {% if postdata['flag'] == 0 %}
+    <form method="post">
+      <input type="submit" value="合意する" onclick="return confirm('本当によろしいですね?');">
+    </form>
+
+    <div id="not_submit">
+      <a href="{{ url_for('history.index') }}">キャンセル</a>
+    </div>
+    
+      
+  {% endif %}
+
+
+
+{% endblock %}

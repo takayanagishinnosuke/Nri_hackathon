@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}おばあちゃんを登録する{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    <label for="cliantname">おばあちゃんの名前</label>
+    <textarea name="cliantname" id="cliantname">{{ request.form['cliantname'] }}</textarea>
+
+    <label for="ship">続柄</label>
+    <input name="ship" id="ship" value="{{ request.form['ship'] }}" required>
+
+    <label for="cliant_id">登録ID</label>
+    <input name="cliant_id" id="cliant_id" required>
+
+    <label for="password">パスワード</label>
+    <input type="password" name="password" id="password" required>
+
+    <label for="file">写真</label>
+    <input type="file" name="file">
+
+
+    <input type="submit" value="保存">
+  </form>
+
+  <a href="/fam/main">戻る</a>
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}おばあちゃんを編集する{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+
+    <label for="cliantname">おばあちゃんの名前</label>
+    <textarea name="cliantname" id="cliantname">{{ request.form['famname'] or cliant['cliantname'] }}</textarea>
+
+    <label for="ship">続柄</label>
+    <input name="ship" id="ship"
+      value="{{ request.form['ship'] or cliant['ship'] }}" required>
+
+    <label for="cliant_id">登録ID</label>
+    <input name="cliant_id" id="cliant_id" value="{{ request.form['cliant_id'] or cliant['cliant_id'] }}" required>
+
+    <label for="addres">写真</label>
+    <div><img src="../../{{ cliant['filepath'] }}" width="600px" height="500px"></div>
+
+
+    <input type="submit" value="保存する">
+  </form>
+  
+
+  <form action="{{ url_for('family.delete', id=cliant['id']) }}" method="post">
+    <input class="danger" type="submit" value="削除" onclick="return confirm('ほんとに削除しますか?');">
+  </form>
+
+  <a href="/fam/main">戻る</a>
+  
+{% endblock %}
