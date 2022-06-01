@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 
+<head>
+
 <title>{% block title %}{% endblock %}おばあAnalytics</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+</head>
 
 <nav>
   <h1>おばあAnalytics</h1>
@@ -25,4 +30,7 @@
     <div class="flash">{{ message }}</div>
   {% endfor %}
   {% block content %}{% endblock %}
+  <script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
 </section>
+
+</html>

@@ -38,7 +38,7 @@ def deposit():
     df_s.columns=['Date', 'ValueDate', 'Type', 'Amount', 'Remarks','Balance','Itemkey']
     df_s.head() #確認用で表示
 
-    return df_s
+    return df_s,jsondict
 
 """振り込み時のapi"""
 def transfer(jsondata):

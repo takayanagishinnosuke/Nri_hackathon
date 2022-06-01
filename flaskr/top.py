@@ -11,6 +11,7 @@ import base64
 import flaskr.api
 import pandas as pd
 import flaskr.Line_notify
+import json
 from dotenv import load_dotenv
 import os
 
@@ -25,12 +26,14 @@ sunabar_url = 'https://bank.sunabar.gmo-aozora.com/bank/notices/important'
 """一覧画面の処理"""
 @bp.route('/', methods=('GET','POST'))
 def index():
-  data = flaskr.api.deposit()
+  data,json = flaskr.api.deposit()
   db = get_db()
+  #pandasDFをSQL格納(最新を上書き)
   data.to_sql('deposit', con=db, if_exists='replace')
-  print(type(data))
+  
+  # print(json) #apiのjsonを確認
 
-  return render_template('top/index.html')
+  return render_template('top/index.html',json=json)
 
 
 """おばあちゃんの振り込み画面"""

@@ -3,6 +3,7 @@
 {% block header %}
   {% if g.user %}
     <a class="action" href="{{ url_for('history.index') }}">履歴照会へ</a>
+    <a class="action" href="{{ url_for('family.create_cliant') }}">おばあちゃん登録へ</a>
     <a class="action" href="{{ url_for('top.index') }}">サマリTOPへ</a>
   {% endif %}
 {% endblock %}
