@@ -9,16 +9,14 @@
 </head>
 
 <nav>
-  <h1>おばあちゃんAnalytics</h1>
+  <h1>おばあちゃん専用振込画面</h1>
   <ul>
     {% if g.user %}
-      <li><span>こんにちは{{ g.user['username'] }}さん</span></li>
-      <li><a href="{{ url_for('top.index') }}">TOP</a></li>
-      <li><a href="{{ url_for('auth.logout') }}">ログアウト</a></li>
+      <li><span>こんにちは。内容をよく見て入力してね。</span></li>
+      <li><a href="{{ url_for('auth.cliantlogin') }}">ログアウト</a></li>
       
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">新規登録</a></li>
-      <li><a href="{{ url_for('auth.login') }}">ログイン</a></li>
+      <li><a href="{{ url_for('auth.cliantlogin') }}">ログイン</a></li>
     {% endif %}
   </ul>
 </nav>

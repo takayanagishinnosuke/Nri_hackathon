@@ -1,10 +1,162 @@
 html { 
   font-family:sans-serif;
-  padding: 1rem;
 }
 
 body {
-  max-width: 960px; 
   margin: 0 auto; 
+  padding: 0 auto;
+}
+
+nav{
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(67,205,172,1);
+}
+
+nav > h1{
+  align-items: center;
+  margin-left: 50px;
+  color: #fff;
+}
+
+nav > ul{
+  display: flex;
+  list-style: none;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 40px;
+  gap: 0 30px;
+  color: #00008b;
+}
+
+nav > ul > li > a{
+  color: #fff;
+  text-decoration: none;
+}
+
+/* TOPページ */
+
+section{
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+header{
+  margin-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.action{
+  text-decoration: none;
+  color: darkgray;
+  margin: 10px;
+}
+
+h1{
+  margin-top: 20px;
+  margin-left: 50px;
+  color: #6e6e6e;
+}
+
+/* 家族一覧ページ */
+.post{
+  margin-left: 50px;
+}
+
+#famcreate{
+  margin-left: 50px;
+}
+
+#famimg{
+  margin-top: 20px;
+}
+
+#famabout{
+  display: flex;
+}
+
+#famabout > a{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+/* 新規家族登録ページ */
+
+form{
+  margin-top: 40px;
+}
+
+form table{
+  margin: 0 auto;
+  border-spacing: 0;
+  border-top: 2.5px #666 solid;
+}
+
+form th{
+  border-bottom: 0.5px #666 solid;
+  width: 240px;
+  padding: 20px;
+  text-align: left;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+form td{
+  border-bottom: 0.5px #666 solid;
+  padding: 10px;
+  width: 400px;
+  text-align: left;
+  font-weight: normal;
+}
+
+#btn{
+  margin: 50px 400px;
+}
+
+#back{
+  display: flex;
+}
+#back > a{
+  color: #00008b;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: 150px;
+  margin-top: 30px;
+}
+
+/* 家族編集ページ */
+
+.delete{
+  margin: 0 400px;
+}
+
+/* おばあちゃん登録ページ /cliant */
+
+
+/* 履歴照会ページ history/main */
+table{
+  margin: 0 auto;
+  border-spacing: 0;
+  border-top: 2.5px #666 solid;
+}
+
+th{
+  border-bottom: 0.5px #666 solid;
+  width: 240px;
+  padding: 20px;
+  text-align: left;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+/* リクエスト詳細画面 history/permission */
+td{
+  border-bottom: 0.5px #666 solid;
+  padding: 10px;
+  width: 400px;
+  text-align: left;
+  font-weight: normal;
 }
 

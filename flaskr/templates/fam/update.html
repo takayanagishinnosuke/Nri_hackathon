@@ -1,33 +1,44 @@
 {% extends 'base.html' %}
 
 {% block header %}
+<div id="back">
   <h1>{% block title %}家族を編集する{% endblock %}</h1>
+  <a href="/fam/main">戻る</a>
+</div>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="ship">家族の続柄</label>
-    <input name="ship" id="ship"
-      value="{{ request.form['ship'] or post['ship'] }}" required>
+  <form method="post" enctype="multipart/form-data">
+    <table>
+      <tr>
+        <th><label for="ship">家族の続柄</label></th>
+        <td><input name="ship" id="ship"
+          value="{{ request.form['ship'] or post['ship'] }}" required></td>
+      </tr>
 
-    <label for="famname">家族の名前</label>
-    <textarea name="famname" id="famname">{{ request.form['famname'] or post['famname'] }}</textarea>
+      <tr>
+        <th><label for="famname">家族の名前</label></th>
+        <td><input name="famname" id="famname" value="{{ request.form['famname'] or post['famname'] }}" required></td>
+      </tr>
 
-    <label for="addres">連絡先</label>
-    <textarea name="addres" id="addres">{{ request.form['addres'] or post['addres'] }}</textarea>
+      <tr>
+        <th><label for="addres">連絡先</label></th>
+        <td><input name="addres" id="addres" value="{{ request.form['addres'] or post['addres'] }}" required></td>
+      </tr>
 
-    <label for="addres">顔の画像</label>
-    <div><img src="../../{{ post['filepath'] }}" width="600px" height="500px"></div>
+      <tr>
+        <th><label for="img">写真</label></th>
+        <td><img src="../../{{ post['filepath'] }}" width="150px" height="150px"></td>
+      </tr>
 
+    </table>
 
-    <input type="submit" value="保存する">
+    <input id="btn" type="submit" value="保存する">
+  </form>
+
+  <form action="{{ url_for('family.delete', id=post['id']) }}" method="post" class="delete">
+    <input class="danger" type="submit" value="削除する" onclick="return confirm('ほんとに削除しますか?');">
   </form>
   
-
-  <form action="{{ url_for('family.delete', id=post['id']) }}" method="post">
-    <input class="danger" type="submit" value="削除" onclick="return confirm('ほんとに削除しますか?');">
-  </form>
-
-  <a href="/fam/main">戻る</a>
   
 {% endblock %}

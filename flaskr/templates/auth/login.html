@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}ログイン{% endblock %}</h1>
+<h1>{% block title %}管理ユーザーログイン{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}  
   <form method="post">
-    <label for="username">ユーザー名</label>
-    <input name="username" id="username" required>
+    <table>
+      <tr>
+        <th><label for="username">ユーザー名</label></th>
+        <td><input name="username" id="username" required></td>
+      </tr>
 
-    <label for="password">パスワード</label>
-    <input type="password" name="password" id="password" required>
+      <tr>
+        <th><label for="password">パスワード</label></th>
+        <td><input type="password" name="password" id="password" required></td>
+      </tr>
+    </table>
 
-    <input type="submit" value="ログイン" class="sumbitbtn">
+    <input type="submit" value="ログイン" class="sumbitbtn" id="btn">
+    
   </form>
 {% endblock %}

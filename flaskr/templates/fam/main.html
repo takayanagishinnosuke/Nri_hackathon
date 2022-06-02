@@ -10,22 +10,23 @@
 
 {% block content %}
 
-  <h1>{% block title %}家族の一覧{% endblock %}</h1>
+  <h1>{% block title %}Families{% endblock %}</h1>
   {% if g.user %}
-    <a class="action" href="{{ url_for('family.createfamily') }}">新規登録</a>
+    <a class="action" id="famcreate" href="{{ url_for('family.createfamily') }}">新規登録</a>
   {% endif %}
 
   {% for post in postfamily %}
     <article class="post">
-      <header>
-        <div>
-          <h1>{{ post['ship'] }}</h1>
-          <div class="about">名前 {{ post['famname']}}</div>
-          <div><img src="../../{{ post['filepath'] }}" width="300px" height="300px"></div>
-        </div>
+      <div id="famimg">
+        <img src="../../{{ post['filepath'] }}" width="300px" height="300px">
+      </div>
+      <div id="famabout">
+        <h1>{{ post['ship'] }}</h1>
+        <h1>{{ post['famname']}}</h1>
         {% if g.user['id'] == post['author_id'] %}
           <a class="action" href="{{ url_for('family.update', id=post['id']) }}">編集する</a>
         {% endif %}
+      </div>
     </article>
     {% if not loop.last %}
       <hr>

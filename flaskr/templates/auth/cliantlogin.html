@@ -1,17 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'cliantbase.html' %}
 
 {% block header %}
-<h1>{% block title %}おばあちゃんのログイン画面{% endblock %}</h1>
+<h1>{% block title %}おばあちゃん専用ログイン画面{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}  
   <form method="post">
-    <label for="cliant_id">登録ID</label>
-    <input name="cliant_id" id="cliant_id" required>
+    <table>
+      <tr>
+        <th><label for="cliant_id">登録ID</label></th>
+        <td><input name="cliant_id" id="cliant_id" required></td>
+      </tr>
 
-    <label for="password">パスワード</label>
-    <input type="password" name="password" id="password" required>
+      <tr>
+        <th><label for="password">パスワード</label></th>
+        <td><input type="password" name="password" id="password" required></td>
+      </tr>
+    </table>
 
-    <input type="submit" value="ログイン" class="sumbitbtn">
+    <input type="submit" value="ログイン" class="sumbitbtn" id="btn">
   </form>
 {% endblock %}

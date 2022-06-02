@@ -1,31 +1,46 @@
 {% extends 'base.html' %}
 
 {% block header %}
+<div id="back">
   <h1>{% block title %}おばあちゃんを登録する{% endblock %}</h1>
+  <a href="/fam/main">戻る</a>
+</div>
 {% endblock %}
 
 {% block content %}
   <form method="post" enctype="multipart/form-data">
-    <label for="cliantname">おばあちゃんの名前</label>
-    <textarea name="cliantname" id="cliantname">{{ request.form['cliantname'] }}</textarea>
+    <table>
+      <tr>
+        <th><label for="cliantname">おばあちゃんの名前</label></th>
+        <td><input name="cliantname" id="cliantname" value="{{ request.form['cliantname'] }}" required></td>
+      </tr>
 
-    <label for="ship">続柄</label>
-    <input name="ship" id="ship" value="{{ request.form['ship'] }}" required>
+      <tr>
+        <th><label for="ship">続柄</label></th>
+        <td><input name="ship" id="ship" value="{{ request.form['ship'] }}" required></td>
+      </tr>
 
-    <label for="cliant_id">登録ID</label>
-    <input name="cliant_id" id="cliant_id" required>
+      <tr>
+        <th><label for="cliant_id">登録ID</label></th>
+        <td><input name="cliant_id" id="cliant_id" required></td>
+      </tr>
 
-    <label for="password">パスワード</label>
-    <input type="password" name="password" id="password" required>
+      <tr>
+        <th><label for="password">パスワード</label></th>
+        <td><input type="password" name="password" id="password" required></td>
+      </tr>
 
-    <label for="file">写真</label>
-    <input type="file" name="file">
+      <tr>
+        <th><label for="file">写真</label></th>
+        <td><input type="file" name="file"></td>
+      </tr>
+    </table>
 
+    <input type="submit" value="保存" id="btn">
 
-    <input type="submit" value="保存">
   </form>
 
-  <a href="/fam/main">戻る</a>
+  
 
 
 {% endblock %}

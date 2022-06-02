@@ -162,7 +162,7 @@ def create_cliant():
 
 """クライアント編集の処理"""
 """編集するIDが一致しているか確認"""
-def get_post(id, check_author=True):
+def get_post_cliant(id, check_author=True):
   cliant = get_db().execute(
     'SELECT c.id, author_id, cliantname, ship, cliant_id, filepath'
     ' FROM cliant c JOIN user u ON c.author_id = u.id'
@@ -181,7 +181,7 @@ def get_post(id, check_author=True):
 @bp.route('/<int:id>cliantupdate', methods=('GET', 'POST'))
 @login_required
 def updatecliant(id):
-  cliant = get_post(id)
+  cliant = get_post_cliant(id)
   error = None
 
   if request.method == 'POST':
