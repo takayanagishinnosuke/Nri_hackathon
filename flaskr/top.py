@@ -26,14 +26,20 @@ sunabar_url = 'https://bank.sunabar.gmo-aozora.com/bank/notices/important'
 """一覧画面の処理"""
 @bp.route('/', methods=('GET','POST'))
 def index():
-  data,json = flaskr.api.deposit()
+  data,jsondict = flaskr.api.deposit()
   db = get_db()
   #pandasDFをSQL格納(最新を上書き)
   data.to_sql('deposit', con=db, if_exists='replace')
-  
   # print(json) #apiのjsonを確認
 
-  return render_template('top/index.html',json=json)
+  #誰が何回取下申請してるかのデータを作る
+  per_count_df = pd.read_sql_query('SELECT applyNo, flag, permit FROM apidata',db)
+  pre_count = per_count_df.groupby('permit').size()
+  js_pre_count = pre_count.to_dict()
+  js_count = json.dumps(js_pre_count, ensure_ascii=False)
+
+
+  return render_template('top/index.html',json=jsondict,count=js_count)
 
 
 """おばあちゃんの振り込み画面"""

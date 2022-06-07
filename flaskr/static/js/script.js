@@ -2,6 +2,7 @@
 let ctx = document.getElementById('radar-chart');
 let enctx = document.getElementById('en-chart');
 
+
 //valudate取得用
 let date = []
 //残高val取得用
@@ -12,13 +13,16 @@ let transactionType_two = []
 
 //jsonをobjに変換
 let json_str = JSON.stringify(api_data)
+
+let json_count_obj = JSON.parse(js_count)
 let json_obj = JSON.parse(json_str)
 
 //jsonのkeyの数を取得
 let key = Object.keys(json_obj)
 
 //json確認用
-console.log(json_obj)
+console.log(json_obj) //api_jsonデータ
+console.log(json_count_obj) //家族毎の却下押下カウントデータ
 
 //valudate取得
 for (let i in key){
