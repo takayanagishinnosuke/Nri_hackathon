@@ -9,36 +9,3 @@ CREATE TABLE user (
   password TEXT NOT NULL
 );
 
-CREATE TABLE cliant (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  cliantname TEXT NOT NULL,
-  ship TEXT NOT NULL,
-  cliant_id TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL,
-  filepath TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
-);
-
-CREATE TABLE family (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  ship TEXT NOT NULL,
-  famname TEXT NOT NULL,
-  addres TEXT NOT NULL,
-  filepath TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
-);
-
-CREATE TABLE apidata (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  money TEXT NOT NULL,
-  beneficiaryName TEXT NOT NULL,
-  applyNo TEXT NOT NULL,
-  flag INTEGER NOT NULL,
-  permit TEXT,
-  FOREIGN KEY (author_id) REFERENCES user (id)
-);

@@ -2,23 +2,18 @@
 
 {% block header %}
   {% if g.user %}
-    <a class="action" href="{{ url_for('family.index') }}">家族一覧へ</a>
-    <a class="action" href="{{ url_for('family.create_cliant') }}">おばあちゃん登録へ</a>
-    <a class="action" href="{{ url_for('history.index') }}">履歴照会へ</a>
+    <a class="action" href="">マイページへ</a>
     
   {% endif %}
 {% endblock %}
 
 {% block content %}
 {% if g.user %}
-  <h1>{% block title %}Summary{% endblock %}</h1>
-  <canvas id="radar-chart" height="400px" width="600px"></canvas>
-  <canvas id="en-chart" height="400px" width="600px"></canvas>
-
+  <h1>{% block title %}三十三館音巡りマップ{% endblock %}</h1>
+  
 
 {% endif %}
 <script>
-  let api_data = {{json|tojson}};
-  let js_count = {{count|tojson}};
+  
 </script>
 {% endblock %}

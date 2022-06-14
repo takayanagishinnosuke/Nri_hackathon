@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% if g.user %}
+    <a class="action" href="top/index.html">TOP</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  <h1>{% block title %}マイページ{% endblock %}</h1>
+  {% if g.user %}
+
+  <div id="user">
+    <h1>{{ postdata['username'] }}さんの情報</h1>
+  </div>  
+
+  {% endif %}
+
+{% endblock %}

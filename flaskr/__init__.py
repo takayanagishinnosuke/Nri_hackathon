@@ -5,7 +5,7 @@ from flask import Flask
 
 
 def create_app(test_config=None):
-    # 初期設定だよ
+    # 初期設定
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev', #デプロイ時はKeyをしっかり暗号化する
@@ -32,17 +32,11 @@ def create_app(test_config=None):
 
     from . import auth
     app.register_blueprint(auth.bp)
-    
-    
-    from . import family
-    app.register_blueprint(family.bp)
-
-    from . import history
-    app.register_blueprint(history.bp)
 
     from . import top
     app.register_blueprint(top.bp)
-    app.add_url_rule('/', endpoint='index')
-    
 
+    from . import mypage
+    app.register_blueprint(mypage.bp)
+    
     return app

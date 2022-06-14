@@ -3,7 +3,7 @@ from flask import Blueprint, flash, g, redirect, render_template, request, sessi
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
 
-bp = Blueprint('auth', __name__,url_prefix='/auth')
+bp = Blueprint('auth', __name__,)
 
 """ユーザー登録"""
 @bp.route('/register', methods=('GET', 'POST'))
@@ -35,7 +35,7 @@ def register():
   return render_template('auth/register.html')
 
 """ログイン"""
-@bp.route('/login', methods=('GET', 'POST'))
+@bp.route('/', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -54,7 +54,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect('/')
+            return redirect('/top')
 
         flash(error)
 
@@ -76,7 +76,7 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
   session.clear()
-  return redirect(url_for('index'))
+  return redirect(url_for('auth.login'))
 
 """ログインしていれば以降の必要な認証はスルー"""
 def login_required(view):
@@ -88,30 +88,3 @@ def login_required(view):
     return view(**kwargs)
   
   return wrapped_view
-
-
-"""おばあちゃんログイン"""
-@bp.route('/cliantlogin', methods=('GET', 'POST'))
-def cliantlogin():
-    if request.method == 'POST':
-        cliant_id = request.form['cliant_id']
-        password = request.form['cliant_id']
-        db = get_db()
-        error = None
-        cliant = db.execute(
-            'SELECT * FROM cliant WHERE cliant_id = ?', (cliant_id,)
-        ).fetchone()
-
-        if cliant_id is None:
-            error = '登録IDが不正です'
-        elif not check_password_hash(cliant['password'], password):
-            error = 'パスワードが正しくありません'
-
-        if error is None:
-            session.clear()
-            session['user_id'] = cliant['author_id']
-            return redirect(url_for('top.clianttop'))
-
-        flash(error)
-
-    return render_template('auth/cliantlogin.html')
