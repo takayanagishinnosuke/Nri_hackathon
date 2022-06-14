@@ -16,4 +16,5 @@ def index():
   kannon_dict = kanon_df.to_dict(orient='index')
   # js_kannon_data = json.dumps(kannon_dict, ensure_ascii=False)
   
+  
   return render_template('top/index.html', kannon_dict=kannon_dict)
