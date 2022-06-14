@@ -2,7 +2,7 @@
 
 {% block header %}
   {% if g.user %}
-    <a class="action" href="">マイページへ</a>
+    <a class="action" href="mypage/user.html">マイページへ</a>
     
   {% endif %}
 {% endblock %}
@@ -14,6 +14,7 @@
 
 {% endif %}
 <script>
+  let kannon_data = {{kannon_dict|tojson}};
   
 </script>
 {% endblock %}

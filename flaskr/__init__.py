@@ -7,10 +7,11 @@ from flask import Flask
 def create_app(test_config=None):
     # 初期設定
     app = Flask(__name__, instance_relative_config=True)
+    # app.config['JSON_AS_ASCII'] = False
     app.config.from_mapping(
         SECRET_KEY='dev', #デプロイ時はKeyをしっかり暗号化する
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'), #DBの指定
-        bootstrap = Bootstrap(app)
+        bootstrap = Bootstrap(app),
     )
 
     if test_config is None:
