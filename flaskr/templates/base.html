@@ -6,11 +6,33 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
+<!-- vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<!-- Vue leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+crossorigin=""></script>
+<script type="module" src="//unpkg.com/vue2-leaflet"></script>
+
+<!-- typekit -->
+<script>
+  (function(d){var config={kitId:'scs0wqs',scriptTimeout:3000,async:!0},h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive"},config.scriptTimeout),tk=d.createElement("script"),f=!1,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=!0;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=!0;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)})(document)
+</script>
+
+<!-- particle.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/5-6/js/5-6.js"></script>
+
 </head>
+<div id="particles-js"></div>
 
 <nav>
   <h1>会津三十三観音巡り</h1>
-  <ul>
+  <ul class="global-nav">
     {% if g.user %}
       <li><span>こんにちは{{ g.user['username'] }}さん</span></li>
       <li><a href="{{ url_for('top.index') }}">TOP</a></li>
@@ -33,5 +55,111 @@
   {% block content %}{% endblock %}
   <script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
 </section>
+
+<style>
+  html,body{
+    height: 100%;
+  }
+  body{
+    background-image: url(../static/imgfile/common_bg.jpg);
+  }
+  *{
+    font-family: a-otf-ryumin-pr6n, serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  .global-nav{
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+  }
+
+
+#particles-js{ 
+  position:fixed;/*描画固定*/
+  z-index:-1;/*描画を一番下に*/
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+<script>
+ particlesJS("particles-js", {
+  "particles":{
+    "number":{
+      "value":30,//この数値を変更すると桜の数が増減できる
+      "density":{
+        "enable":true,
+        "value_area":1121.6780303333778
+      }
+    },
+    "color":{
+      "value":"#fff"
+    },
+    "shape":{
+      "type":"image",//形状は画像を指定
+      "stroke":{
+        "width":0,
+      },
+      "image":{
+        "src":"http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/5-6/img/flower.png",//画像を指定
+        "width":120,
+        "height":120
+      }
+    },
+    "opacity":{
+      "value":0.06409588744762158,
+      "random":true,
+      "anim":{
+        "enable":false,
+        "speed":1,
+        "opacity_min":0.1,
+        "sync":false
+      }
+    },
+    "size":{
+      "value":8.011985930952697,
+      "random":true,
+      "anim":{
+        "enable":false,
+        "speed":4,
+        "size_min":0.1,
+        "sync":false
+      }
+    },
+    "line_linked":{
+      "enable":false,
+    },
+    "move":{
+      "enable":true,
+      "speed":7,//この数値を小さくするとゆっくりな動きになる
+      "direction":"bottom-right",//右下に向かって落ちる
+      "random":false,//動きはランダムにしない
+      "straight":false,//動きをとどめない
+      "out_mode":"out",//画面の外に出るように描写
+      "bounce":false,//跳ね返りなし
+      "attract":{
+        "enable":false,
+        "rotateX":281.9177489524316,
+        "rotateY":127.670995809726
+      }
+    }
+  },
+  "interactivity":{
+    "detect_on":"canvas",
+    "events":{
+      "onhover":{
+        "enable":false,
+      },
+      "onclick":{
+        "enable":false,
+      },
+      "resize":true
+    }
+  },
+  "retina_detect":false
+});
+
+</script>
 
 </html>
