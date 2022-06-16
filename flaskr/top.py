@@ -15,20 +15,15 @@ def index():
   # kanon_df = kannondata.dropna(how='any')
   kannon_dict = kannondata.to_dict(orient='index')
 
-  #json.dumpsはいらなかった
+  #json.dumpsいらなかった
   # js_kannon_data = json.dumps(kannon_dict, ensure_ascii=False)
 
   #宿泊データのDBインポート
-  # df = pd.read_csv('nishiaizu_lodging_facilities.csv', encoding="shift-jis")
-  # df2 = df.drop(df.columns[6],axis=1)
-  # df2.to_sql(con=db,name='syukuhaku')
+  # df = pd.read_csv('okukawamura_data.csv', encoding="utf-8")
+  # df.to_sql(con=db,name='lodging')
 
-  lodging_data = pd.read_sql_query('SELECT name, address, distance_km, latitude, longitude FROM syukuhaku',db)
+  lodging_data = pd.read_sql_query('SELECT name, address, distance_km, latitude, longitude, type, project1, project2, project3 FROM lodging',db)
 
-  lodging_df = lodging_data.dropna(how='any')
-  lodging_dict = lodging_df.to_dict(orient='index')
-
-  print(lodging_dict)
-
+  lodging_dict = lodging_data.to_dict(orient='index')
   
-  return render_template('top/index.html', kannon_dict=kannon_dict, lodging_dict=lodging_dict)
+  return render_template('top/index.html', kannon_dict=kannon_dict,lodging_dict=lodging_dict)
