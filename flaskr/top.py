@@ -28,5 +28,7 @@ def index():
   lodging_df = lodging_data.dropna(how='any')
   lodging_dict = lodging_df.to_dict(orient='index')
 
+  print(lodging_dict)
+
   
   return render_template('top/index.html', kannon_dict=kannon_dict, lodging_dict=lodging_dict)

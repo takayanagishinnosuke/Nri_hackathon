@@ -7,7 +7,7 @@ import pandas as pd
 
 bp = Blueprint('mypage', __name__,)
 
-@bp.route('/mypage', methods=('GET', 'POST'))
+@bp.route('/user', methods=('GET', 'POST'))
 def index():
   user_id = session.get('user_id')
   db = get_db()
