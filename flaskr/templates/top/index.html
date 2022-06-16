@@ -8,13 +8,103 @@
 {% endblock %}
 
 {% block content %}
-{% if g.user %}
+{% if g.user %}  
+
+  <div class="fv">
+    <picture>
+      <source media="(max-width: 768px)" srcset="../../static/imgfile/fv-sp.png">
+      <source media="(min-width: 768px)" srcset="../../static/imgfile/fv.png">
+      <img src="../../static/imgfile/fv.png">
+    </picture>
+  </div>
+
   <h1>{% block title %}三十三館音巡りマップ{% endblock %}</h1>
+  <div id="map">
+  </div>
+
+
   
 
 {% endif %}
+<style>
+  :root {
+    --root-font-size: 16;
+  }
+  p {
+      font-size: calc( 13 / var(--root-font-size) * 1rem );
+  }
+  .font-size-dummy {
+    font-size: .75rem;   /* 12px */
+      font-size: .8125rem; /* 13px */
+      font-size: .875rem;  /* 14px */
+      font-size: 1rem;     /* 16px */
+      font-size: 1.25rem;  /* 20px */
+      font-size: 1.75rem;  /* 28px */
+  }
+  #map { height: 600px; }
+  .kannon__img{
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  h1,h2,h3{
+    font-family: kokuryu, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  h1{
+    font-size: 1.75rem;
+    color: #c13669;
+  }
+  h2{
+    font-size: 1.25rem;
+  }
+</style>
+
 <script>
   let kannon_data = {{kannon_dict|tojson}};
-  
+  let lodging_data = {{lodging_dict|tojson}};
 </script>
+
+<script>
+ var map = L.map('map').setView([37.60850662, 139.8457208], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  var popup = L.popup();
+
+  // マッピング処理
+  let i;
+
+  for(i in kannon_data){
+  if(kannon_data[i]instanceof Object){
+    // console.log(kannon_data[i]);
+    console.log(kannon_data[i].address);
+    if(kannon_data[i].kannon_img){
+      let imgSrc = kannon_data[i].kannon_img.split('server/flaskr/').join('');
+      L.marker([kannon_data[i].latitude, kannon_data[i].longitude]).addTo(map)
+    .bindPopup(`
+        <h2> ${kannon_data[i].temple_name} </h2>
+        <h3>観音様：${kannon_data[i].name}</h3>
+        <img src="${imgSrc}" class="kannon__img">
+        <p>住所：${kannon_data[i].address}</p>
+    `).openPopup();
+
+    }else {
+      L.marker([kannon_data[i].latitude, kannon_data[i].longitude]).addTo(map)
+    .bindPopup(`
+        <h2> ${kannon_data[i].temple_name} </h2>
+        <p>観音様：${kannon_data[i].name}</p>
+        <p>住所：${kannon_data[i].address}</p>
+    `).openPopup();
+
+    }
+  }
+  }
+</script>
+
+
 {% endblock %}
