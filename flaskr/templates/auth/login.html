@@ -1,24 +1,48 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}ユーザーログイン{% endblock %}</h1>
+<h1 class="under-title">{% block title %}ユーザーログイン{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}  
-  <form method="post">
-    <table>
-      <tr>
-        <th><label for="username">ユーザー名</label></th>
-        <td><input name="username" id="username" required></td>
-      </tr>
+<div class="container">
+  <div class="columns">
+      <div class="column is-three-fifths">
+          <form method="post" id="form">
 
-      <tr>
-        <th><label for="password">パスワード</label></th>
-        <td><input type="password" name="password" id="password" required></td>
-      </tr>
-    </table>
+              <div class="field">
+                <label class="label">ユーザー名</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="例）taro" name="username" id="username">
+                </div>
+              </div>
+          
+              <div class="field">
+                <label class="label">パスワード</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="xxxxx" name="password" id="password">
+                </div>
+              </div>
+          
+              <div class="field is-grouped">
+                <div class="control">
+                  <input type="submit" value="ログイン" class="sumbitbtn button is-primary" id="btn">
+                </div>
+              </div>
+              
+            </form>
+      </div>
+  </div>
 
-    <input type="submit" value="ログイン" class="sumbitbtn" id="btn">
-    
-  </form>
+</div>
+
+<style>
+    .under-title{
+      font-family: a-otf-ryumin-pr6n, serif !important;
+      font-weight: 700;
+      font-style: normal;
+    }
+</style>
+
+
 {% endblock %}

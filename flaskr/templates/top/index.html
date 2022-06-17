@@ -1,24 +1,59 @@
 {% extends 'base.html' %}
 
-{% block header %}
+<!-- {% block header %}
   {% if g.user %}
     <a class="action" href="mypage/user.html">マイページへ</a>
-    
   {% endif %}
-{% endblock %}
+{% endblock %} -->
 
 {% block content %}
 {% if g.user %}  
 
-  <div class="fv">
-    <picture>
+  <div class="fv" id="fv">
+    <div>
+      <h2>三十三観音巡りとは？</h2>
+      <p>会津へ仏教が伝わったのは、平安初期。東北地方で最も早く仏教文化が広まったと言われているよ。奈良の東大寺で学んだ僧・徳一が人々の素朴な信仰を仏教、観音信仰に取り込み、多くの寺院を開いたんだ。この時作られた勝常寺をはじめとした歴史ある寺院は今でも残っていて、「仏都会津」と呼ばれ、多くの人に親しまれているよ。
+        これらの寺院・観音は全部で三十三。この三十三の寺院・観音を現代風にアレンジにしたのが、僕たち観音ボーイズ。それぞれの寺院でみんな待っているから、遊びに来てね！
+      </p>
+    </div>
+
+    <h2>観音ボーイズ</h2>
+    <carousel autoplay="true" loop="true" per-page="4">
+      <slide>
+          <div class="slider-inner">
+              <img src="../../static/imgfile/kannon-01.png" alt="">
+          </div>
+      </slide>
+      <slide>
+          <div class="slider-inner">
+              <img src="../../static/imgfile/kannon-02.png" alt="">
+          </div>
+      </slide>
+      <slide>
+          <div class="slider-inner">
+              <img src="../../static/imgfile/kannon-03.png" alt="">
+          </div>
+      </slide>
+      <slide>
+          <div class="slider-inner">
+              <img src="../../static/imgfile/kannon-04.png" alt="">
+          </div>
+      </slide>
+      <slide>
+          <div class="slider-inner">
+              <img src="../../static/imgfile/kannon-05.png" alt="">
+          </div>
+      </slide>
+    </carousel>
+    <!-- <picture>
       <source media="(max-width: 768px)" srcset="../../static/imgfile/fv-sp.png">
       <source media="(min-width: 768px)" srcset="../../static/imgfile/fv.png">
       <img src="../../static/imgfile/fv.png">
-    </picture>
+    </picture> -->
   </div>
 
-  <h1>{% block title %}三十三館音巡りマップ{% endblock %}</h1>
+  <h2>{% block title %}三十三館音巡りマップ{% endblock %}</h2>
+  <p>三十三観音と宿泊施設の場所を見てみよう</p>
   <div id="map">
   </div>
 
@@ -47,17 +82,27 @@
     height: auto;
     display: block;
   }
-  h1,h2,h3{
-    font-family: kokuryu, sans-serif;
-    font-weight: 400;
-    font-style: normal;
+
+  /* VueCarouselのスタイル */
+  .VueCarousel{
+    height: 370px;
   }
-  h1{
-    font-size: 1.75rem;
+  .VueCarousel-wrapper, .VueCarousel-inner, .VueCarousel-slide{
+    height: 99% !important;
+  }
+  .VueCarousel-slide .slider-inner {
+    height: 98%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
     color: #c13669;
+    border: 2px solid #c13669;
+    font-size: 30px; 
+    border-radius: 10px;
   }
-  h2{
-    font-size: 1.25rem;
+  .VueCarousel-slide .slider-inner img{
+    width: 96%;
+    height: auto;
   }
 </style>
 
@@ -67,6 +112,16 @@
 </script>
 
 <script>
+  // VueCarousel
+const VueCarousel  = window.VueCarousel.default;
+Vue.use(VueCarousel);
+ 
+let fv = new Vue({
+  el: '#fv'
+});
+
+
+// マッピング
  var map = L.map('map').setView([37.60850662, 139.8457208], 12);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -76,34 +131,77 @@
 
   var popup = L.popup();
 
-  // マッピング処理
+
+    // マップアイコンの変更
+    const yado = L.icon({
+        iconUrl: './static/imgfile/yado.svg',
+
+        iconSize:     [38, 95], // size of the icon
+        shadowSize:   [50, 64], // size of the shadow
+        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62],  // the same for the shadow
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // マップアイコンの変更
+    const temple = L.icon({
+        iconUrl: './static/imgfile/temple.svg',
+
+        iconSize:     [38, 95], // size of the icon
+        shadowSize:   [50, 64], // size of the shadow
+        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62],  // the same for the shadow
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+
+
+    // 寺のマッピング
   let i;
 
   for(i in kannon_data){
-  if(kannon_data[i]instanceof Object){
-    // console.log(kannon_data[i]);
-    console.log(kannon_data[i].address);
-    if(kannon_data[i].kannon_img){
-      let imgSrc = kannon_data[i].kannon_img.split('server/flaskr/').join('');
-      L.marker([kannon_data[i].latitude, kannon_data[i].longitude]).addTo(map)
-    .bindPopup(`
-        <h2> ${kannon_data[i].temple_name} </h2>
-        <h3>観音様：${kannon_data[i].name}</h3>
-        <img src="${imgSrc}" class="kannon__img">
-        <p>住所：${kannon_data[i].address}</p>
-    `).openPopup();
+    if(kannon_data[i]instanceof Object){
+      // console.log(kannon_data[i]);
+      console.log(kannon_data[i].address);
+      if(kannon_data[i].kannon_img){
+        let imgSrc = kannon_data[i].kannon_img.split('server/flaskr/').join('');
+        L.marker([kannon_data[i].latitude, kannon_data[i].longitude],{icon: temple}).addTo(map)
+      .bindPopup(`
+          <h2> ${kannon_data[i].temple_name} </h2>
+          <h3>観音様：${kannon_data[i].name}</h3>
+          <img src="${imgSrc}" class="kannon__img">
+          <p>住所：${kannon_data[i].address}</p>
+      `).openPopup();
 
-    }else {
-      L.marker([kannon_data[i].latitude, kannon_data[i].longitude]).addTo(map)
-    .bindPopup(`
-        <h2> ${kannon_data[i].temple_name} </h2>
-        <p>観音様：${kannon_data[i].name}</p>
-        <p>住所：${kannon_data[i].address}</p>
-    `).openPopup();
+      }else {
+        L.marker([kannon_data[i].latitude, kannon_data[i].longitude],{icon: temple}).addTo(map)
+      .bindPopup(`
+          <h2> ${kannon_data[i].temple_name} </h2>
+          <p>観音様：${kannon_data[i].name}</p>
+          <p>住所：${kannon_data[i].address}</p>
+      `).openPopup();
 
+      }
     }
   }
+
+  // 宿のプロット
+  for(i in kannon_data){
+    if(lodging_data[i]instanceof Object){
+      console.log(lodging_data[i]);
+      console.log(lodging_data[i].address);
+
+      L.marker([lodging_data[i].latitude, lodging_data[i].longitude],{icon: yado}).addTo(map)
+      .bindPopup(`
+          <h2> ${lodging_data[i].name} </h2>
+          <p>住所：${lodging_data[i].address}</p>
+          <p>野沢駅からの距離：${lodging_data[i].distance_km}km</p>
+          <button>予約する</button>
+      `).openPopup();
+    }
   }
+
+
+
 </script>
 
 
