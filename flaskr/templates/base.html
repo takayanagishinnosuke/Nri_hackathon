@@ -2,7 +2,7 @@
 
 <head>
 
-<title>{% block title %}{% endblock %}会津三十三観音巡り</title>
+<title>{% block title %}{% endblock %}三十三観音巡礼図改メ</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
@@ -40,45 +40,56 @@ crossorigin=""></script>
 
 
 </head>
-<div id="particles-js"></div>
 
-<nav>
-  <h1>会津三十三観音巡り</h1>
-  {% if g.user %}
-  <p>やあ、{{ g.user['username'] }}さん</p>
-  {% endif %}
+<div class="wrap"></div>
 
-  <ul class="global-nav">
+  <div id="particles-js"></div>
+
+  <nav>
+    <h1>三十三観音巡礼図改メ</h1>
     {% if g.user %}
-      <li><a href="{{ url_for('top.index') }}">TOP</a></li>
-      <li><a class="action" href="mypage/user.html">MYPAGE</a></li>
-      <li><a href="{{ url_for('auth.logout') }}">LOGOUT</a></li>
-      
-    {% else %}
-      <li><a href="{{ url_for('auth.register') }}">SIGNUP</a></li>
-      <li><a href="{{ url_for('auth.login') }}">LOGIN</a></li>
+    <p>やあ、{{ g.user['username'] }}さん</p>
     {% endif %}
-  </ul>
-</nav>
 
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-  <script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
-</section>
+    <ul class="global-nav">
+      {% if g.user %}
+        <li><a href="{{ url_for('top.index') }}">TOP</a></li>
+        <li><a class="action" href="{{ url_for('mypage.index') }}">MYPAGE</a></li>
+        <li><a href="{{ url_for('auth.logout') }}">LOGOUT</a></li>
+        
+      {% else %}
+        <li><a href="{{ url_for('auth.register') }}">SIGNUP</a></li>
+        <li><a href="{{ url_for('auth.login') }}">LOGIN</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <section class="content">
+    <header>
+      {% block header %}{% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+    <script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
+
+  </section>
+
+  <footer>
+    <p>Copyright (C) 西会津 All Rights Reserved.</p>
+  </footer>
+
+
+
 
 <style>
   html,body{
-    height: 100%;
+    height: auto;
   }
-  body{
+  /* body{
     background-image: url(../static/imgfile/common_bg.jpg);
-  }
+  } */
   *{
     font-family: a-otf-ryumin-pr6n, serif;
     font-weight: 300;
@@ -88,6 +99,8 @@ crossorigin=""></script>
     display: flex;
     justify-content: space-evenly;
     list-style: none;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
   #particles-js{ 
     position:fixed;/*描画固定*/
@@ -121,7 +134,21 @@ crossorigin=""></script>
     text-decoration: none;
     color: #222;
   }
-
+  footer{
+    margin: 0 calc(50% - 50vw);
+    padding: 0 calc(50vw - 50%);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: url(../static/imgfile/top__importantInfo_bg.png) repeat;
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+    margin-top: 3rem;
+  }
+  .wrap{
+    background-image: url(../static/imgfile/common_bg.jpg);
+    height: 100%;
+  }
 </style>
 
 <script>
