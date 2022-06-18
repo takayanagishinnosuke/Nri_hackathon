@@ -5,10 +5,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
 import pandas as pd
 import json
+from flaskr.auth import login_required
 
 bp = Blueprint('top', __name__,)
 
-@bp.route('/top', methods=('GET', 'POST'))
+@bp.route('/', methods=('GET', 'POST'))
+@login_required
 def index():
   db = get_db()
   kannondata = pd.read_sql_query('SELECT name, temple_name, address, latitude, longitude, kannon_img, place_img_1, place_img_2, place_img_3 FROM kannondata',db)
