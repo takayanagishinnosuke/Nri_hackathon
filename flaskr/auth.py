@@ -35,7 +35,7 @@ def register():
   return render_template('auth/register.html')
 
 """ログイン"""
-@bp.route('/', methods=('GET', 'POST'))
+@bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -54,7 +54,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect('/top')
+            return redirect('/')
 
         flash(error)
 
