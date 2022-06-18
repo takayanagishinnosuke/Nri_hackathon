@@ -5,12 +5,70 @@
 
 {% block content %}
 
-  <h1>{% block title %}マイページ{% endblock %}</h1>
+  <h1 class="user__title">{% block title %}マイページ{% endblock %}</h1>
   {% if g.user %}
 
   <div id="user">
-    <h1>{{ postdata['username'] }}さんの情報</h1>
+    <h1 class="user__title">{{ postdata['username'] }}さんの情報</h1>
+
+    <section class="user__section">
+      <h2 class="user__section__title">予約状況</h2>
+      <div class="columns">
+        <div class="column">
+          <h3 class="user__section__lodge__title">さゆりオートパーク</h3>
+        </div>
+        <div class="column">
+        </div>
+        <div class="column">
+        </div>
+        <div class="column">
+        </div>
+      </div>
+    </section>
+
+    <section class="user__section user__collection">
+      <h2 class="user__section__title">訪問した寺院・観音</h2>
+      <div class="columns">
+        <div class="column">
+          <h3 class="user__section__temple__title">綾金観音堂</h3>
+          <h4>観音様：十一面観世音</h4>
+          <img src="../../static/imgfile/kannon-01.png" alt="">
+        </div>
+        <div class="column">
+          <h3 class="user__section__temple__title">高吉観音堂</h3>
+          <h4>観音様：十一面観世音</h4>
+          <img src="../../static/imgfile/kannon-02.png" alt="">
+        </div>
+        <div class="column">
+          <h3 class="user__section__temple__title">松野観音堂</h3>
+          <h4>観音様：千手観世音</h4>
+          <img src="../../static/imgfile/kannon-03.png" alt="">
+        </div>
+        <div class="column">
+        </div>
+      </div>
+    </section>
+
+
   </div>
+  <style>
+    .user__title, .user__section__title{
+      font-family: a-otf-ryumin-pr6n, serif !important;
+      font-weight: 700;
+      font-style: normal;
+      margin-top: 2rem;
+    }
+    .user__section__lodge__title{
+      font-family: a-otf-ryumin-pr6n, serif !important;
+      font-weight: 700;
+      font-style: normal;
+    }
+    .user__section__temple__title{
+      font-family: a-otf-ryumin-pr6n, serif !important;
+      font-weight: 700;
+      font-style: normal;
+    }
+  </style>
 
   <!-- 宿泊施設は単一の登録を前提にする -->
 

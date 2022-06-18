@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 
-<!-- {% block header %}
-  {% if g.user %}
-    <a class="action" href="mypage/user.html">マイページへ</a>
-  {% endif %}
-{% endblock %} -->
+
 
 {% block content %}
 {% if g.user %}  
@@ -113,12 +109,12 @@
 
 <script>
   // VueCarousel
-const VueCarousel  = window.VueCarousel.default;
-Vue.use(VueCarousel);
+  const VueCarousel  = window.VueCarousel.default;
+  Vue.use(VueCarousel);
  
-let fv = new Vue({
-  el: '#fv'
-});
+  let fv = new Vue({
+    el: '#fv'
+  });
 
 
 // マッピング
@@ -195,7 +191,7 @@ let fv = new Vue({
           <h2> ${lodging_data[i].name} </h2>
           <p>住所：${lodging_data[i].address}</p>
           <p>野沢駅からの距離：${lodging_data[i].distance_km}km</p>
-          <button>予約する</button>
+          <a class="button" href="{{ url_for('mypage.index') }}">予約する</a>
       `).openPopup();
     }
   }
