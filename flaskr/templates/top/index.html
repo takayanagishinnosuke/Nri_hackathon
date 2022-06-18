@@ -9,11 +9,11 @@
     <div>
       <h2>三十三観音巡りとは？</h2>
       <p>会津へ仏教が伝わったのは、平安初期。東北地方で最も早く仏教文化が広まったと言われているよ。奈良の東大寺で学んだ僧・徳一が人々の素朴な信仰を仏教、観音信仰に取り込み、多くの寺院を開いたんだ。この時作られた勝常寺をはじめとした歴史ある寺院は今でも残っていて、「仏都会津」と呼ばれ、多くの人に親しまれているよ。
-        これらの寺院・観音は全部で三十三。この三十三の寺院・観音を現代風にアレンジにしたのが、僕たち観音ボーイズ。それぞれの寺院でみんな待っているから、遊びに来てね！
+        これらの寺院・観音は全部で三十三。この三十三の寺院・観音を現代風にアレンジにされたのが、僕たち観音改メ。それぞれの寺院でみんな待っているから、遊びに来てね！
       </p>
     </div>
 
-    <h2>観音ボーイズ</h2>
+    <h2>観音様改メ</h2>
     <carousel autoplay="true" loop="true" per-page="4">
       <slide>
           <div class="slider-inner">
@@ -99,6 +99,13 @@
   .VueCarousel-slide .slider-inner img{
     width: 96%;
     height: auto;
+  }
+  .ex_type{
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 2px 7px;
+    margin-left: 1rem;;
   }
 </style>
 
@@ -188,15 +195,21 @@
 
       L.marker([lodging_data[i].latitude, lodging_data[i].longitude],{icon: yado}).addTo(map)
       .bindPopup(`
-          <h2> ${lodging_data[i].name} </h2>
+          <h2>${lodging_data[i].name}</h2>
           <p>住所：${lodging_data[i].address}</p>
           <p>野沢駅からの距離：${lodging_data[i].distance_km}km</p>
+          <p>体験できる内容<span class="ex_type">${lodging_data[i].type}</span>
+
+            <ul>
+              <li>${lodging_data[i].project1}</li>
+              <li>${lodging_data[i].project2}</li>
+              <li>${lodging_data[i].project3}</li>
+            </ul>
+          </p>
           <a class="button" href="{{ url_for('mypage.index') }}">予約する</a>
       `).openPopup();
     }
   }
-
-
 
 </script>
 
